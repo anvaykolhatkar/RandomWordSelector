@@ -24,6 +24,10 @@ public class RandomWordSelectorApplication implements CommandLineRunner {
 		SpringApplication.run(RandomWordSelectorApplication.class, args);
 	}
 
+	/*
+	 * This is a run method of CommandLineRunner
+	 * It reads the list of words from the classpath resources & calls method that returns random word  
+	 */
 	@Override
 	public void run(String... args) throws Exception {
         List<String> words = new ArrayList<>();
@@ -45,6 +49,10 @@ public class RandomWordSelectorApplication implements CommandLineRunner {
 		
 	}
 
+	/*
+	 * This method instantiates SecureRandom with bound equals the size of the list
+	 * and generates the random index in the list, eventually returning the string  
+	 */
 	public String generateRandomWord(List<String> words) {
         if (words == null || 
         		words.size() == 0) {
