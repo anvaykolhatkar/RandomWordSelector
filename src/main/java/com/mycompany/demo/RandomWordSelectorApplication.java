@@ -26,7 +26,7 @@ public class RandomWordSelectorApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		String fileName = "words_alpha.txt";
+		String fileName = "config/words_alpha.txt";
 		ClassLoader classLoader = new RandomWordSelectorApplication().getClass().getClassLoader();
         File file = new File(classLoader.getResource(fileName).getFile()); 
         BufferedReader br = null ;
