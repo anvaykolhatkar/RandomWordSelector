@@ -3,15 +3,15 @@ package com.mycompany.demo;
 
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,23 +26,18 @@ public class RandomWordSelectorApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		String fileName = "config/words_alpha.txt";
-		ClassLoader classLoader = new RandomWordSelectorApplication().getClass().getClassLoader();
-        File file = new File(classLoader.getResource(fileName).getFile()); 
-        BufferedReader br = null ;
-        try {
-            br = new BufferedReader(new FileReader(file));
-        } catch (FileNotFoundException ex) {
-            LOG.debug(ex.getMessage());
-            return;
-        }
         List<String> words = new ArrayList<>();
         String word;
         try {
-            while((word = br.readLine()) != null) {
+    		InputStream inputStream = getClass().getResourceAsStream("/data/words_alpha.txt");
+    		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            
+            while((word = reader.readLine()) != null) {
                 words.add(word);
             }
-        } catch (IOException ex) {
+            reader.close();
+
+        } catch (FileNotFoundException ex) {
             LOG.debug(ex.getMessage());
             return;
         }
