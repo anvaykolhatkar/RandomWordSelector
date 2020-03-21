@@ -29,7 +29,7 @@ public class RandomWordSelectorApplication implements CommandLineRunner {
         List<String> words = new ArrayList<>();
         String word;
         try {
-    		InputStream inputStream = getClass().getResourceAsStream("/data/words_alpha.txt");
+    		InputStream inputStream = getClass().getResourceAsStream("/config/words_alpha.txt");
     		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             
             while((word = reader.readLine()) != null) {
